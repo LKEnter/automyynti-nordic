@@ -4,7 +4,7 @@ import "./globals.css";
 
 // Fallback baseline metadata metrics
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://morfoos.fi"),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL),
   icons: {
     icon: "/assets/favicon.ico",
   },

@@ -2,10 +2,10 @@
 const nextConfig = {
     reactStrictMode: true,
     poweredByHeader: false,
-    // Force optimization steps to pack code compactly
+    transpilePackages: ["@morfoos/core", "@morfoos/morfoos-os"],
     experimental: {
-      optimizePackageImports: ["@morfoos/core"]
-    }
+      optimizePackageImports: ["@morfoos/core"],
+    },
   };
   
   export default nextConfig;

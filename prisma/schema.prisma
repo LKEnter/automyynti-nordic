@@ -1,0 +1,396 @@
+// Morfoos next-starter — unified schema from @morfoos/morfoos-os partials.
+// Source: morfoos-os/packages/morfoos-os/prisma/*.prisma
+// Models use plain String IDs (siteId, postId) — no @relation FKs across modules.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+// --- Host auth (starter-owned) ---
+
+enum UserRole {
+  SUPERADMIN
+  ADMIN
+  EDITOR
+}
+
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String   @map("password_hash")
+  name         String?
+  role         UserRole @default(ADMIN)
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  @@map("users")
+}
+
+// --- analytics.prisma ---
+
+model PageView {
+  id          String   @id @default(cuid())
+  siteId      String   @map("site_id")
+  visitorHash String   @map("visitor_hash") @db.VarChar(64)
+  path        String   @db.VarChar(2048)
+  referrer    String?  @db.VarChar(512)
+  device      String   @db.VarChar(16)
+  city        String?  @db.VarChar(128)
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  @@index([siteId])
+  @@index([createdAt])
+  @@index([path])
+  @@index([visitorHash])
+  @@map("page_views")
+}
+
+model SiteConversion {
+  id              String   @id @default(cuid())
+  siteId          String   @map("site_id")
+  visitorHash     String   @map("visitor_hash") @db.VarChar(64)
+  path            String   @db.VarChar(2048)
+  conversionType  String   @map("conversion_type") @db.VarChar(32)
+  elementId       String?  @map("element_id") @db.VarChar(256)
+  event           String?  @db.VarChar(32)
+  entityId        String?  @map("entity_id") @db.VarChar(256)
+  conversionGroup String?  @map("conversion_group") @db.VarChar(16)
+  metadata        Json?
+  createdAt       DateTime @default(now()) @map("created_at")
+
+  @@index([siteId])
+  @@index([createdAt])
+  @@index([conversionType])
+  @@index([visitorHash])
+  @@index([siteId, conversionGroup, createdAt])
+  @@index([siteId, entityId, createdAt])
+  @@index([siteId, event, createdAt])
+  @@map("site_conversions")
+}
+
+model FormRegistry {
+  id              String   @id @default(cuid())
+  siteId          String   @map("site_id")
+  formId          String   @map("form_id") @db.VarChar(256)
+  displayName     String   @map("display_name") @db.VarChar(512)
+  conversionGroup String   @default("lead") @map("conversion_group") @db.VarChar(16)
+  trackedFields   Json     @default("[]") @map("tracked_fields")
+  updatedAt       DateTime @updatedAt @map("updated_at")
+
+  @@unique([siteId, formId])
+  @@index([siteId])
+  @@map("morfoos_form_registry")
+}
+
+model BlogMetric {
+  id             String   @id @default(cuid())
+  siteId         String   @map("site_id")
+  postId         String   @map("post_id")
+  visitorHash    String   @map("visitor_hash") @db.VarChar(64)
+  categoryId     String?  @map("category_id")
+  maxScrollDepth Int      @default(0) @map("max_scroll_depth")
+  timeOnPost     Int      @default(0) @map("time_on_post")
+  completedRead  Boolean  @default(false) @map("completed_read")
+  createdAt      DateTime @default(now()) @map("created_at")
+
+  @@index([siteId])
+  @@index([postId])
+  @@index([categoryId])
+  @@index([createdAt])
+  @@index([visitorHash])
+  @@map("blog_metrics")
+}
+
+// --- chatbot-analytics.prisma ---
+
+model AnalyticsEvent {
+  id             String   @id @default(cuid())
+  ts             DateTime
+  event          String   @db.VarChar(64)
+  path           String   @db.VarChar(2048)
+  country        String?  @db.VarChar(64)
+  device         String?  @db.VarChar(16)
+  referrerDomain String?  @map("referrer_domain") @db.VarChar(255)
+  data           Json?
+  dedupKey       String   @unique @map("dedup_key") @db.VarChar(128)
+  createdAt      DateTime @default(now()) @map("created_at")
+
+  @@index([ts])
+  @@index([event])
+  @@index([path])
+  @@map("analytics_events")
+}
+
+// --- blog.prisma ---
+
+model BlogPost {
+  id                   String    @id @default(cuid())
+  siteId               String    @map("site_id")
+  slug                 String
+  title                String
+  excerpt              String?   @db.Text
+  content              String    @db.Text
+  draftContent         String?   @map("draft_content") @db.Text
+  featuredImage        String?   @map("featured_image") @db.Text
+  status               String    @default("draft")
+  publishedAt          DateTime? @map("published_at")
+  primaryCategoryId    String?   @map("primary_category_id")
+  tagIds               Json      @default("[]")
+  secondaryCategoryIds Json?     @map("secondary_category_ids")
+  isFeatured           Boolean   @default(false) @map("is_featured")
+  seoTitle             String?   @map("seo_title")
+  seoDescription       String?   @map("seo_description") @db.Text
+  readTime             Int?      @map("read_time")
+  authorId             String?   @map("author_id")
+  dateModified         DateTime  @updatedAt @map("date_modified")
+  createdAt            DateTime  @default(now()) @map("created_at")
+
+  @@unique([siteId, slug])
+  @@index([siteId])
+  @@index([siteId, status, publishedAt])
+  @@map("morfoos_blog_posts")
+}
+
+model BlogCategory {
+  id          String   @id @default(cuid())
+  siteId      String   @map("site_id")
+  name        String
+  slug        String
+  description String?  @db.Text
+  parentId    String?  @map("parent_id")
+  sortOrder   Int      @default(0) @map("sort_order")
+  isActive    Boolean  @default(true) @map("is_active")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  @@unique([siteId, slug])
+  @@index([siteId])
+  @@map("morfoos_blog_categories")
+}
+
+model BlogTag {
+  id        String   @id @default(cuid())
+  siteId    String   @map("site_id")
+  name      String
+  slug      String
+  groupId   String?  @map("group_id")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@unique([siteId, slug])
+  @@index([siteId])
+  @@index([siteId, groupId])
+  @@map("morfoos_blog_tags")
+}
+
+model BlogTagGroup {
+  id        String   @id @default(cuid())
+  siteId    String   @map("site_id")
+  name      String
+  slug      String
+  sortOrder Int      @default(0) @map("sort_order")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@unique([siteId, slug])
+  @@index([siteId])
+  @@map("morfoos_blog_tag_groups")
+}
+
+model BlogWebhookConfig {
+  id        String   @id @default(cuid())
+  siteId    String   @map("site_id")
+  url       String   @db.VarChar(2048)
+  secret    String   @db.VarChar(128)
+  isActive  Boolean  @default(true) @map("is_active")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@index([siteId])
+  @@map("morfoos_blog_webhooks")
+}
+
+// --- content.prisma ---
+
+model ReferenceCase {
+  id          String   @id @default(cuid())
+  siteId      String   @map("site_id")
+  audience    String
+  scale       String
+  title       String
+  location    String
+  duration    String
+  typeLine    String   @map("type_line")
+  beforeImage String?  @map("before_image")
+  afterImage  String?  @map("after_image")
+  situation   String   @db.Text
+  execution   String   @db.Text
+  outcomes    Json
+  metrics     Json
+  sortOrder   Int      @default(0) @map("sort_order")
+  active      Boolean  @default(true) @map("active")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  @@index([siteId])
+  @@index([siteId, sortOrder])
+  @@map("morfoos_reference_cases")
+}
+
+model TeamMember {
+  id        String   @id @default(cuid())
+  siteId    String   @map("site_id")
+  name      String
+  role      String
+  bio       String   @default("") @db.Text
+  email     String?
+  phone     String?
+  imageSrc  String?  @map("image_src")
+  b2bLead   Boolean  @default(false) @map("b2b_lead")
+  b2bQuote  String?  @map("b2b_quote") @db.Text
+  active    Boolean  @default(true) @map("active")
+  sortOrder Int      @default(0) @map("sort_order")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@index([siteId])
+  @@index([siteId, sortOrder])
+  @@map("morfoos_team_members")
+}
+
+model Testimonial {
+  id             String   @id @default(cuid())
+  siteId         String   @map("site_id")
+  legacyId       Int?     @unique @map("legacy_id")
+  author         String
+  timeLabel      String   @map("time_label")
+  rating         Int      @default(5)
+  avatarClass    String?  @map("avatar_class")
+  avatarImageUrl String?  @map("avatar_image_url")
+  quote          String   @map("quote") @db.Text
+  businessName   String?  @map("business_name")
+  roleTitle      String?  @map("role_title")
+  sortOrder      Int      @default(0) @map("sort_order")
+  active         Boolean  @default(true) @map("active")
+  createdAt      DateTime @default(now()) @map("created_at")
+  updatedAt      DateTime @updatedAt @map("updated_at")
+
+  @@index([siteId])
+  @@index([siteId, sortOrder])
+  @@map("morfoos_testimonials")
+}
+
+model GlobalContactInfo {
+  id           String   @id @default(cuid())
+  siteId       String   @unique @map("site_id")
+  companyName  String   @map("company_name")
+  businessId   String?  @map("business_id")
+  phone        String
+  email        String
+  address      String
+  postalCode   String   @map("postal_code")
+  city         String
+  openingHours String?  @map("opening_hours")
+  socialLinks  Json     @default("{}")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  @@map("morfoos_global_contacts")
+}
+
+// --- chatbot.prisma ---
+
+model ChatbotSettings {
+  id              String   @id @default(cuid())
+  siteId          String   @unique @map("site_id")
+  isEnabled       Boolean  @default(true) @map("is_enabled")
+  hubTitle        String   @default("Miten voimme auttaa?") @map("hub_title")
+  buttonLabel     String   @default("Tarvitsetko apua?") @map("button_label")
+  triggerDelaySec Int      @default(3) @map("trigger_delay_sec")
+  phoneOverride   String?  @map("phone_override")
+  primaryColor    String   @default("#2563eb") @map("primary_color")
+  avatarType      String   @default("bot") @map("avatar_type")
+  appsConfig      Json     @default("{}") @map("apps_config")
+  updatedAt       DateTime @updatedAt @map("updated_at")
+
+  @@map("morfoos_chatbot_settings")
+}
+
+model ChatbotFlow {
+  id           String   @id @default(cuid())
+  siteId       String   @map("site_id")
+  name         String
+  slug         String
+  isActive     Boolean  @default(false) @map("is_active")
+  startNodeId  String?  @map("start_node_id")
+  hubLabel     String   @default("Aloita keskustelu") @map("hub_label")
+  sortOrder    Int      @default(0) @map("sort_order")
+  editorCanvas Json     @default("{}") @map("editor_canvas")
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  @@unique([siteId, slug])
+  @@index([siteId])
+  @@index([siteId, isActive, sortOrder])
+  @@map("morfoos_chatbot_flows")
+}
+
+model ChatbotNode {
+  id         String   @id @default(cuid())
+  siteId     String   @map("site_id")
+  flowId     String   @map("flow_id")
+  type       String   @default("message")
+  content    String   @db.Text
+  nextNodeId String?  @map("next_node_id")
+  sortOrder  Int      @default(0) @map("sort_order")
+  faqs       Json     @default("[]")
+  createdAt  DateTime @default(now()) @map("created_at")
+  updatedAt  DateTime @updatedAt @map("updated_at")
+
+  @@index([siteId, flowId])
+  @@map("morfoos_chatbot_nodes")
+}
+
+model ChatbotOption {
+  id            String  @id @default(cuid())
+  siteId        String  @map("site_id")
+  nodeId        String  @map("node_id")
+  label         String
+  nextNodeId    String? @map("next_node_id")
+  action        String  @default("none")
+  actionValue   String? @map("action_value")
+  actionMessage String? @map("action_message") @db.Text
+  sortOrder     Int     @default(0) @map("sort_order")
+
+  @@index([siteId, nodeId])
+  @@map("morfoos_chatbot_options")
+}
+
+model ChatbotLead {
+  id        String   @id @default(cuid())
+  siteId    String   @map("site_id")
+  name      String
+  phone     String
+  flowSlug  String?  @map("flow_slug")
+  nodeId    String?  @map("node_id")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@index([siteId])
+  @@map("morfoos_chatbot_leads")
+}
+
+model ChatbotContactRequest {
+  id        String   @id @default(cuid())
+  siteId    String   @map("site_id")
+  name      String
+  email     String
+  message   String   @db.Text
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@index([siteId])
+  @@map("morfoos_chatbot_contact_requests")
+}

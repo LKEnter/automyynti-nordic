@@ -1,5 +1,4 @@
-import React from "react";
-import { AdminRouter } from "@morfoos/morfoos-os";
+import { AdminRouter } from "@morfoos/morfoos-os/admin-router";
 
 interface PageProps {
   params: Promise<{ slug?: string[] }>;
