@@ -1,5 +1,5 @@
 // Morfoos next-starter — unified schema from @morfoos/morfoos-os partials.
-// Source: morfoos-os/packages/morfoos-os/prisma/*.prisma
+// Source: morfoos-os/packages/morfoos-os/prisma/*.prisma (incl. site.prisma)
 // Models use plain String IDs (siteId, postId) — no @relation FKs across modules.
 
 generator client {
@@ -29,6 +29,23 @@ model User {
   updatedAt    DateTime @updatedAt @map("updated_at")
 
   @@map("users")
+}
+
+// --- site.prisma ---
+
+model Site {
+  id             String   @id
+  name           String
+  hasBlog        Boolean  @default(false) @map("has_blog")
+  hasReviews     Boolean  @default(false) @map("has_reviews")
+  hasReferences  Boolean  @default(false) @map("has_references")
+  hasTeam        Boolean  @default(false) @map("has_team")
+  hasContacts    Boolean  @default(false) @map("has_contacts")
+  hasChatbot     Boolean  @default(false) @map("has_chatbot")
+  isChatbotPaid  Boolean  @default(false) @map("is_chatbot_paid")
+  createdAt      DateTime @default(now()) @map("created_at")
+
+  @@map("sites")
 }
 
 // --- analytics.prisma ---

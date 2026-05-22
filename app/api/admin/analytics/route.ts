@@ -4,5 +4,4 @@ import { createAdminAnalyticsGET, createRequireMorfoosAdmin } from "@morfoos/mor
 export const GET = createAdminAnalyticsGET({
   requireAdmin: createRequireMorfoosAdmin(),
   defaultSiteId: process.env.NEXT_PUBLIC_SITE_ID,
-  hasBlog: true,
 });

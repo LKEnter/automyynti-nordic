@@ -1,7 +1,7 @@
-import { PrismaClient, UserRole } from "@prisma/client";
+import "./load-env";
+import { UserRole } from "@prisma/client";
 import crypto from "crypto";
-
-const prisma = new PrismaClient();
+import { prisma } from "../lib/prisma";
 
 /** Server-side password hashing using Node crypto (no native bcrypt binary). */
 function hashPassword(password: string): string {
@@ -15,7 +15,9 @@ async function seedAdminUser() {
   const password = process.env.MORFOOS_ADMIN_PASSWORD?.trim();
 
   if (!email || !password) {
-    console.error("❌ Seeding halted: MORFOOS_ADMIN_EMAIL or MORFOOS_ADMIN_PASSWORD missing in .env");
+    console.error(
+      "❌ Seeding halted: MORFOOS_ADMIN_EMAIL or MORFOOS_ADMIN_PASSWORD missing in .env or .env.local"
+    );
     process.exit(1);
   }
 
@@ -31,6 +33,24 @@ async function seedAdminUser() {
   });
 
   return email;
+}
+
+async function seedSiteRecord(siteId: string, name: string) {
+  await prisma.site.upsert({
+    where: { id: siteId },
+    update: { name },
+    create: {
+      id: siteId,
+      name,
+      hasBlog: false,
+      hasReviews: false,
+      hasReferences: false,
+      hasTeam: false,
+      hasContacts: true,
+      hasChatbot: false,
+      isChatbotPaid: false,
+    },
+  });
 }
 
 async function seedSiteDefaults(siteId: string) {
@@ -81,7 +101,9 @@ async function seedSiteDefaults(siteId: string) {
 async function main() {
   const email = await seedAdminUser();
   const siteId = process.env.NEXT_PUBLIC_SITE_ID?.trim() || "development";
+  const siteName = "Esimerkki Yritys Oy";
 
+  await seedSiteRecord(siteId, siteName);
   await seedSiteDefaults(siteId);
 
   console.log("\n=================================================");
