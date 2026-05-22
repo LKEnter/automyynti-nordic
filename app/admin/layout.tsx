@@ -1,3 +1,4 @@
+import "@/lib/morfoos";
 import React from "react";
 
 export const metadata = {
