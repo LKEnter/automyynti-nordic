@@ -80,7 +80,7 @@ async function seedSiteDefaults(siteId: string) {
       hubTitle: "Miten voimme auttaa?",
       buttonLabel: "Tarvitsetko apua?",
       triggerDelaySec: 3,
-      primaryColor: "#2563eb",
+      primaryColor: "#001EB3",
       avatarType: "bot",
       appsConfig: {},
     },

@@ -1,13 +1,11 @@
 import type { Metadata } from "next";
 import { MorfoosGlobalProvider } from "@morfoos/core/providers";
+import Header from "./components/Header";
 import "./globals.css";
 
 // Fallback baseline metadata metrics
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL),
-  icons: {
-    icon: "/assets/favicon.ico",
-  },
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -19,6 +17,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           siteId={process.env.NEXT_PUBLIC_SITE_ID || "development_fallback"}
           autoTrackClicks={true}
         >
+          <Header />
           {children}
         </MorfoosGlobalProvider>
       </body>
