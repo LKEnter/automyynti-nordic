@@ -22,7 +22,7 @@ export type ButtonProps = ButtonAsButtonProps | ButtonAsLinkProps;
 
 const base =
   "cursor-pointer group relative isolate overflow-hidden inline-flex items-center justify-center rounded-xl px-8 py-3.5 text-sm font-semibold uppercase tracking-wide no-underline select-none " +
-  "transition-[transform,box-shadow,color,border-color,opacity] duration-200 ease-out md:hover:scale-[1.02] " +
+  "transition-all duration-200 ease-out md:hover:scale-[1.02] " +
   "will-change-transform focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]/45 focus-visible:ring-offset-2";
 
 const variants: Record<ButtonVariant, string> = {

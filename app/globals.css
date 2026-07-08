@@ -6,29 +6,30 @@
 @source "../node_modules/@morfoos/core/dist/**/*.{js,cjs}";
 
 @theme {
-  --color-brand-50: #e8eaf9;
-  --color-brand-500: #001eb3;
-  --color-brand-700: #001688;
-  --color-primary: #001eb3;
-  --color-secondary: #f5f5f5;
-  --color-accent: #001eb3;
+  --color-brand-50: #e9f2fe;
+  --color-brand-500: #0068e8;
+  --color-brand-700: #004fb0;
+  --color-primary: #0068e8;
+  --color-secondary: #f6f7f9;
+  --color-accent: #0068e8;
   --color-foreground: #1a1a1a;
-  --color-muted: rgba(26, 26, 26, 0.7);
+  --color-muted: #666666;
+  --color-border: #e6e6e6;
   --color-on-primary: #ffffff;
   --color-background: #ffffff;
-  --font-sans: "Futura", "Futura PT", "Century Gothic", "Apple Gothic", sans-serif;
-  --font-heading: "Futura", "Futura PT", "Century Gothic", "Apple Gothic", sans-serif;
+  --font-sans: var(--font-inter), "Inter", sans-serif;
+  --font-heading: var(--font-manrope), "Manrope", sans-serif;
 }
 
 :root {
   --background: #ffffff;
   --foreground: #1a1a1a;
-  --secondary: #f5f5f5;
-  --accent: #001eb3;
-  --muted: rgba(26, 26, 26, 0.7);
+  --secondary: #f6f7f9;
+  --accent: #0068e8;
+  --muted: #666666;
   --on-primary: #ffffff;
-  --admin-primary: #001eb3;
-  --admin-nav-active: #001eb3;
+  --admin-primary: #0068e8;
+  --admin-nav-active: #0068e8;
 }
 
 html,
@@ -64,5 +65,53 @@ body {
 
   .hero-clip-right {
     clip-path: polygon(14% 0, 100% 0, 100% 100%, 4% 100%);
+  }
+
+  .financing-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 6px;
+    border-radius: 9999px;
+    background: linear-gradient(
+      to right,
+      var(--color-accent) 0%,
+      var(--color-accent) var(--slider-progress),
+      rgba(255, 255, 255, 0.15) var(--slider-progress),
+      rgba(255, 255, 255, 0.15) 100%
+    );
+    outline: none;
+    cursor: pointer;
+  }
+
+  .financing-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 22px;
+    height: 22px;
+    border-radius: 9999px;
+    border: 2px solid var(--color-border);
+    background: #ffffff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    cursor: grab;
+  }
+
+  .financing-slider:active::-webkit-slider-thumb {
+    cursor: grabbing;
+  }
+
+  .financing-slider::-moz-range-thumb {
+    width: 22px;
+    height: 22px;
+    border-radius: 9999px;
+    border: 2px solid var(--color-border);
+    background: #ffffff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    cursor: grab;
+  }
+
+  .financing-slider::-moz-range-track {
+    height: 6px;
+    border-radius: 9999px;
+    background: rgba(255, 255, 255, 0.15);
   }
 }

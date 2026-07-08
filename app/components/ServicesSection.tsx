@@ -1,110 +1,124 @@
-import Link from "next/link";
+import Image from "next/image";
 import Button from "./Button";
-import { sectionH2Class } from "../lib/sectionTypography";
+import { sectionH2CenterClass, sectionLedeCenterClass } from "../lib/sectionTypography";
 
 type Service = {
   title: string;
-  subtitle?: string;
-  icon: string; // public path
-  href?: string;
-  image: string; // public path
+  description: string;
+  imageSrc: string;
+  imageAlt: string;
+  cta: string;
+  href: string;
 };
 
 const SERVICES: Service[] = [
   {
-    title: "Moottorihuolto",
-    icon: "/icons/diagnostic.svg",
-    href: "#",
-    image: "/assets/services/air-service.jpg",
+    title: "Tarkastetut vaihtoautot",
+    description:
+      "Valikoimastamme löydät huolella tarkastettuja vaihtoautoja. Jokainen auto valitaan kunnon, historian ja hinta-laatusuhteen perusteella.",
+    imageSrc: "/assets/images/cars/volkswagen-golf.webp",
+    imageAlt: "Tarkastettu vaihtoauto T1 Auton valikoimassa",
+    cta: "Tutustu valikoimaan",
+    href: "#autot",
   },
   {
-    title: "Jarrujen tarkastus ja huolto",
-    icon: "/icons/brake.svg",
-    href: "#",
-    image: "/assets/services/brake-service.jpg",
+    title: "Etsimme juuri oikean auton",
+    description:
+      "Jos et löydä sopivaa autoa valikoimastamme, etsimme sen puolestasi. Kerro toiveesi, niin käytämme kokemustamme löytääksemme juuri sinulle sopivan auton.",
+    imageSrc: "/assets/images/services/buy-in.jpg",
+    imageAlt: "Asiakas keskustelemassa auton ostosta",
+    cta: "Kerro millaista autoa etsit",
+    href: "#contact",
   },
   {
-    title: "Öljynvaihto",
-    icon: "/icons/battery.svg",
-    href: "#",
-    image: "/assets/services/diagnostic-service.jpg",
+    title: "Vaihtoauto vastaanotetaan",
+    description:
+      "Arvioimme nykyisen autosi nopeasti ja reilusti. Vaihtoauto voidaan hyödyntää osana seuraavan autosi hankintaa.",
+    imageSrc: "/assets/images/services/fair-trade-in.jpg",
+    imageAlt: "Vaihtoauton arviointi",
+    cta: "Pyydä arvio vaihtoautosta",
+    href: "#contact",
   },
   {
-    title: "Ilmastoinnin suorituskyky ja huolto",
-    icon: "/icons/fan.svg",
-    href: "#",
-    image: "/assets/services/suspension-service.jpg",
+    title: "Joustava rahoitus",
+    description:
+      "Vertailemme vaihtoehdot useilta rahoituskumppaneilta ja tarjoamme kilpailukykyisen ratkaisun niin yksityisille kuin yrityksille.",
+    imageSrc: "/assets/financing.jpg",
+    imageAlt: "Rahoitusneuvottelu autoliikkeessä",
+    cta: "Kysy rahoituksesta",
+    href: "#rahoitus",
+  },
+  {
+    title: "Auto valmiina heti käyttöön",
+    description:
+      "Huolehdimme siitä, että autosi on viimeistelty ja valmis heti kaupanteon jälkeen — nouda liikkeestämme tai sovi toimituksesta.",
+    imageSrc: "/assets/images/services/delivery.png",
+    imageAlt: "Auto valmiina luovutukseen",
+    cta: "",
+    href: "#contact",
   },
 ];
 
-function ServiceCard({ service }: { service: Service }) {
-  const CardTag = service.href ? Link : "div";
-  const cardProps = service.href ? ({ href: service.href } as const) : ({} as const);
+function ServiceRow({ service, index }: { service: Service; index: number }) {
+  const imageLeft = index % 2 === 0;
 
   return (
-    <CardTag
-      {...(cardProps as any)}
-      className="group relative isolate block min-h-[320px] overflow-hidden rounded-4xl bg-black shadow-none outline-none transition-transform duration-200 hover:-translate-y-0.5 focus-visible:ring-2 focus-visible:ring-[var(--color-primary)]/40 sm:min-h-[360px]"
+    <article
+      className={["flex flex-col items-center gap-10 md:gap-14 xl:gap-20", imageLeft ? "lg:flex-row" : "lg:flex-row-reverse"].join(
+        " ",
+      )}
     >
-      <div
-        className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-[1.03]"
-        style={{ backgroundImage: `url(${service.image})` }}
-        aria-hidden
-      />
-      <div className="absolute inset-0 bg-gradient-to-tr from-black/70 via-black/30 to-black/10" aria-hidden />
-      <div className="absolute inset-0 ring-1 ring-white/10" aria-hidden />
-
-      <div className="relative flex h-full flex-col p-6">
-        <div className="flex items-center gap-3">
-          <div className="grid size-12 place-items-center rounded-2xl bg-white/10 ring-1 ring-white/15 backdrop-blur-sm">
-            <img src={service.icon} alt="" className="size-7 invert opacity-95" />
-          </div>
-          <div className="min-w-0">
-            <p className="m-0 font-heading text-lg font-semibold uppercase leading-tight tracking-wide text-white">
-              {service.title}
-            </p>
-            {service.subtitle ? (
-              <p className="m-0 mt-1 text-sm font-semibold uppercase tracking-wide text-white/85">{service.subtitle}</p>
-            ) : null}
-          </div>
+      <div className="w-full flex-1 overflow-hidden rounded-[20px]">
+        <div className="relative aspect-[16/10]">
+          <Image
+            src={service.imageSrc}
+            alt={service.imageAlt}
+            fill
+            className="object-cover"
+            sizes="(max-width: 1023px) 100vw, 50vw"
+          />
         </div>
-
-        <span className="pointer-events-none absolute bottom-[-1px] right-[-1px] inline-flex items-center rounded-tl-3xl bg-white px-10 py-5 text-base font-semibold tracking-tight text-[var(--color-foreground)] shadow-[0_10px_24px_rgba(0,0,0,0.25)] transition-colors duration-300 group-hover:text-[var(--color-primary)]">
-          Varaa
-        </span>
       </div>
-    </CardTag>
+
+      <div className="h-full flex-1 border-b border-[var(--color-border)] pb-12 md:border-t md:py-16">
+        <h3 className="font-heading text-3xl font-extrabold tracking-tight text-[var(--color-foreground)] md:text-4xl">
+          {service.title}
+        </h3>
+
+        <p className="mt-5 max-w-xl text-lg leading-relaxed text-[var(--color-muted)]">{service.description}</p>
+
+        {service.cta ? (
+          <div className="mt-8">
+            <Button href={service.href} variant="primary">
+              {service.cta}
+            </Button>
+          </div>
+        ) : null}
+      </div>
+    </article>
   );
 }
 
 export default function ServicesSection() {
   return (
-    <section id="palvelut" className="w-full bg-white py-14 md:py-20" aria-label="Palvelut">
+    <section id="palvelut" className="border-t border-[var(--color-border)] py-16 md:py-24" aria-labelledby="services-heading">
       <div className="mx-auto max-w-[1440px] px-5 md:px-8">
-        <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
-          <div className="min-w-0">
-            <h2 className={sectionH2Class}>
-              Palvelut
-            </h2>
-            <p className="m-0 mt-3 max-w-3xl text-sm leading-relaxed text-[var(--color-muted)] md:text-base">
-              Huollamme ja korjaamme yleisimmät viat nopeasti ja läpinäkyvästi. Varaa aika tai pyydä arvio — vastaamme yleensä saman työpäivän aikana.
-            </p>
-          </div>
+        <header className="mx-auto mb-20 max-w-2xl text-center md:mb-0">
+          <h2 id="services-heading" className={sectionH2CenterClass}>
+            Miten voimme auttaa?
+          </h2>
+          <p className={sectionLedeCenterClass}>
+            Autokauppaa kokonaispalveluna. Huolehdimme jokaisesta vaiheesta aina oikean auton löytämisestä sen
+            turvalliseen luovutukseen.
+          </p>
+        </header>
 
-          <div className="flex shrink-0 flex-wrap items-center gap-3">
-            <Button href="#" variant="primary">
-              Näytä kaikki
-            </Button>
-          </div>
-        </div>
-
-        <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2">
-          {SERVICES.map((s) => (
-            <ServiceCard key={`${s.title}-${s.subtitle ?? ""}`} service={s} />
+        <div className="mt-12 space-y-14 md:mt-20 md:space-y-24">
+          {SERVICES.map((service, index) => (
+            <ServiceRow key={service.title} service={service} index={index} />
           ))}
         </div>
       </div>
     </section>
   );
 }
-

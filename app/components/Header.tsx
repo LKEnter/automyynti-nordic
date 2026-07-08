@@ -1,29 +1,24 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import Button from "./Button";
 
 const NAV_LINKS = [
-  { label: "Huolto", href: "#" },
-  { label: "Meistä", href: "#" },
-  { label: "Ota yhteyttä", href: "#" },
+  { label: "Autot", href: "#autot" },
+  { label: "Rahoitus", href: "#rahoitus" },
+  { label: "Palvelut", href: "#palvelut" },
+  { label: "Yhteystiedot", href: "#contact" },
 ] as const;
-
-const navLinkClass =
-  "whitespace-nowrap text-xs font-semibold uppercase tracking-[0.18em] text-white/90 transition-colors hover:text-white " +
-  "drop-shadow-[0_1px_3px_rgba(0,0,0,0.55)]";
-
-const navLinkScrolledClass =
-  "whitespace-nowrap text-xs font-semibold uppercase tracking-[0.18em] text-[var(--color-foreground)]/80 transition-colors hover:text-[var(--color-primary)]";
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 48);
+    const onScroll = () => setScrolled(window.scrollY > 24);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -37,75 +32,45 @@ export default function Header() {
   const logo = (
     <Link
       href="#"
-      className="inline-flex items-center no-underline"
+      className="inline-flex items-center gap-2 no-underline"
       onClick={() => setMenuOpen(false)}
     >
-      <span className="font-heading text-lg font-bold tracking-tight text-[var(--color-primary)] md:text-xl">
-        Matinkylän Auto
+      <span className="font-heading text-lg font-extrabold tracking-tight text-[var(--color-primary)] md:text-xl">
+        T1 Auto
       </span>
     </Link>
   );
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 w-full">
+    <header className="sticky top-0 left-0 right-0 z-50 w-full">
       <div
         className={[
-          "w-full transition-[background-color,backdrop-filter,border-color,box-shadow] duration-300",
-          scrolled
-            ? "border-b border-black/10 bg-white/95 backdrop-blur-md"
-            : "border-b border-transparent bg-transparent",
+          "w-full border-b bg-white/95 backdrop-blur-md transition-shadow duration-300",
+          scrolled ? "border-black/10 shadow-[0_1px_0_rgba(0,0,0,0.02)]" : "border-black/5",
         ].join(" ")}
       >
-        {/* Desktop: split — logo on white (left), nav on video (right) */}
-        <div className="mx-auto hidden h-16 w-full md:grid md:grid-cols-[52%_1fr] md:items-center lg:h-[4.5rem] lg:grid-cols-[58%_1fr]">
-          <div className="flex min-w-0 items-center px-6 lg:px-8 2xl:px-20">{logo}</div>
+        {/* Desktop */}
+        <div className="mx-auto hidden h-16 w-full max-w-none items-center justify-between px-6 md:flex lg:h-[4.5rem] lg:px-8 2xl:px-12">
+          {logo}
 
-          <div className="relative flex min-w-0 items-center justify-end gap-4 px-6 lg:gap-6 lg:px-8 2xl:px-12">
-            {!scrolled ? (
-              <div
-                className="pointer-events-none"
-                aria-hidden
-              />
-            ) : null}
-
-            <nav
-              className={[
-                "relative z-10 flex w-fit flex-nowrap items-center justify-end gap-4 whitespace-nowrap lg:gap-7",
-                scrolled ? "gap-4" : "",
-              ].join(" ")}
-              aria-label="Päävalikko"
-            >
-              {NAV_LINKS.map((item, i) => (
-                <span key={item.label} className="inline-flex items-center gap-4 lg:gap-7">
-                  {i > 0 ? (
-                    <span
-                      className={scrolled ? "text-[var(--color-muted)]" : "text-white/50"}
-                      aria-hidden
-                    >
-                      •
-                    </span>
-                  ) : null}
-                  <Link
-                    href={item.href}
-                    className={scrolled ? navLinkScrolledClass : navLinkClass}
-                  >
-                    {item.label}
-                  </Link>
-                </span>
-              ))}
-
-              <Button
-                href="#"
-                variant="primary"
-                className={[
-                  "relative z-10 shrink-0 transition-all duration-300 hover:scale-105",
-                  scrolled ? "" : "drop-shadow-[0_1px_3px_rgba(0,0,0,0.45)]",
-                ].join(" ")}
+          <nav
+            className="flex flex-nowrap items-center gap-4 whitespace-nowrap lg:gap-7"
+            aria-label="Päävalikko"
+          >
+            {NAV_LINKS.map((item) => (
+              <Link
+                key={item.label}
+                href={item.href}
+                className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--color-foreground)]/75 transition-colors hover:text-[var(--color-accent)]"
               >
-                Pyydä tarjous
-              </Button>
-            </nav>
-          </div>
+                {item.label}
+              </Link>
+            ))}
+
+            <Button href="#contact" variant="primary" className="shrink-0">
+              Ota yhteyttä
+            </Button>
+          </nav>
         </div>
 
         {/* Mobile */}
@@ -114,12 +79,7 @@ export default function Header() {
           <button
             type="button"
             onClick={() => setMenuOpen((v) => !v)}
-            className={[
-              "grid size-10 place-items-center rounded-xl border transition",
-              scrolled
-                ? "border-black/10 bg-white text-[var(--color-primary)]"
-                : "border-white/20 bg-black/20 text-white backdrop-blur-sm",
-            ].join(" ")}
+            className="grid size-10 place-items-center rounded-xl border border-black/10 bg-white text-[var(--color-accent)] transition"
             aria-label={menuOpen ? "Sulje valikko" : "Avaa valikko"}
             aria-expanded={menuOpen}
           >
@@ -162,12 +122,12 @@ export default function Header() {
               </Link>
             ))}
             <Button
-              href="#"
+              href="#contact"
               variant="secondary"
               className="mt-4 w-full border-[var(--color-primary)] text-[var(--color-primary)]"
               onClick={() => setMenuOpen(false)}
             >
-              Pyydä tarjous
+              Ota yhteyttä
             </Button>
           </nav>
         </aside>
