@@ -4,7 +4,7 @@ import { FormEvent, useState } from "react";
 import { Mail, MapPin, Phone } from "lucide-react";
 import { CONTACT, OPENING_HOURS } from "../lib/contact";
 import Button from "./Button";
-import { sectionEyebrowClass, sectionH2Class, sectionLedeClass } from "../lib/sectionTypography";
+import { sectionH2Class, sectionLedeClass } from "../lib/sectionTypography";
 
 type FormData = {
   name: string;
@@ -43,7 +43,6 @@ export default function ContactSection() {
       <div className="mx-auto max-w-[1440px] px-5 md:px-8">
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
           <div>
-            <p className={sectionEyebrowClass}>Yhteystiedot</p>
             <h2 id="contact-heading" className={`${sectionH2Class} max-w-xl`}>
               Ota yhteyttä — autamme mielellämme
             </h2>

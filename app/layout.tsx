@@ -1,21 +1,8 @@
 import type { Metadata } from "next";
-import { Manrope, Inter } from "next/font/google";
 import { MorfoosGlobalProvider } from "@morfoos/core/providers";
 import Header from "./components/Header";
 import Footer from "../components/layout/Footer";
 import "./globals.css";
-
-const manrope = Manrope({
-  subsets: ["latin"],
-  weight: ["700", "800"],
-  variable: "--font-manrope",
-});
-
-const inter = Inter({
-  subsets: ["latin"],
-  weight: ["400", "500"],
-  variable: "--font-inter",
-});
 
 // Fallback baseline metadata metrics
 export const metadata: Metadata = {
@@ -24,7 +11,14 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="fi" className={`${manrope.variable} ${inter.variable}`}>
+    <html lang="fi">
+      <head>
+        <link rel="preconnect" href="https://api.fontshare.com" />
+        <link
+          href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap"
+          rel="stylesheet"
+        />
+      </head>
       <body>
         {/* Automatically activates case-insensitive link delegation and form monitoring */}
         <MorfoosGlobalProvider

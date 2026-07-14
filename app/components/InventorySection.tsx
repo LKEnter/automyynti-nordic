@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import Button from "./Button";
-import { sectionEyebrowClass, sectionH2Class, sectionLedeClass } from "../lib/sectionTypography";
+import { sectionH2Class, sectionLedeClass } from "../lib/sectionTypography";
 
 type Vehicle = {
   make: string;
@@ -183,7 +183,6 @@ export default function InventorySection() {
       <div className="mx-auto max-w-[1440px] px-5 md:px-8">
         <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
           <header className="max-w-2xl">
-            <p className={sectionEyebrowClass}>Vaihtoautot</p>
             <h2 className={sectionH2Class}>Ajankohtainen valikoima</h2>
             <p className={sectionLedeClass}>
               Kaikki automme on tarkastettu ja hinnoiteltu selkeästi — yksilömme vaihtuvassa valikoimassa.

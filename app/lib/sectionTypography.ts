@@ -1,8 +1,5 @@
 /** Shared section title + lede (brand-variable driven). */
 
-export const sectionEyebrowClass =
-  "m-0 text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent)]";
-
 export const sectionH2Class =
   "font-heading m-0 mt-3 text-3xl font-extrabold tracking-tight text-[var(--color-foreground)] leading-tight md:text-4xl";
 

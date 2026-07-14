@@ -4,7 +4,7 @@ import { useMemo, useState } from "react";
 import Image from "next/image";
 import { Plus } from "lucide-react";
 import Button from "./Button";
-import { sectionEyebrowClass, sectionH2Class, sectionLedeClass } from "../lib/sectionTypography";
+import { sectionH2Class, sectionLedeClass } from "../lib/sectionTypography";
 
 const FINANCING_IMAGE = "/assets/financing.jpg";
 
@@ -83,7 +83,6 @@ export default function FinancingSection() {
     <section id="rahoitus" className="w-full bg-[var(--color-secondary)] py-14 md:py-20" aria-label="Rahoitus">
       <div className="mx-auto max-w-[1440px] px-5 md:px-8">
         <header className="mb-10 max-w-2xl">
-          <p className={sectionEyebrowClass}>Rahoitus</p>
           <h2 className={sectionH2Class}>Rahoituslaskuri</h2>
           <p className={sectionLedeClass}>
             Laske arvio kuukausierästä ja pyydä tarjous — selkeästi ja ilman sitoumuksia.

@@ -1,6 +1,5 @@
 import Image from "next/image";
 import { Check } from "lucide-react";
-import { sectionEyebrowClass } from "../lib/sectionTypography";
 
 const PROMISES = [
   "Tarkastetut autot",
@@ -15,7 +14,6 @@ export default function PromiseSection() {
       <div className="mx-auto max-w-[1440px] px-5 md:px-8">
         <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-[minmax(0,3fr)_minmax(0,4fr)_minmax(0,3fr)] lg:gap-12">
           <div>
-            <p className={sectionEyebrowClass}>Lupauksemme</p>
             <h2 className="font-heading m-0 mt-3 text-3xl font-extrabold tracking-tight text-[var(--color-foreground)] leading-tight md:text-4xl">
               Näin autokaupan kuuluu toimia.
             </h2>

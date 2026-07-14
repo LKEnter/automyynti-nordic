@@ -1,9 +1,5 @@
 import Image from "next/image";
-import {
-  sectionEyebrowClass,
-  sectionH2CenterClass,
-  sectionLedeCenterClass,
-} from "../lib/sectionTypography";
+import { sectionH2CenterClass, sectionLedeCenterClass } from "../lib/sectionTypography";
 
 const STATS = [
   { value: "1", label: "Yhden miehen autoliike" },
@@ -19,7 +15,6 @@ export default function WhyT1AutoSection() {
     <section className="w-full bg-white py-14 md:py-20" aria-label="Miksi T1 Auto">
       <div className="mx-auto max-w-[1440px] px-5 md:px-8">
         <header className="mx-auto max-w-3xl text-center">
-          <p className={sectionEyebrowClass}>Meistä</p>
           <h2 className={sectionH2CenterClass}>Miksi T1 Auto</h2>
           <p className={sectionLedeCenterClass}>
             Henkilökohtaista ja rehellistä autokauppaa Raumalla — ilman turhaa mutkittelua.

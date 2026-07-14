@@ -4,7 +4,6 @@ import { useCallback, useEffect, useMemo, useState, useSyncExternalStore } from 
 import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { IconStar } from "./icons";
-import { sectionEyebrowClass } from "../lib/sectionTypography";
 
 const REDUCE_MOTION_QUERY = "(prefers-reduced-motion: reduce)";
 
@@ -125,7 +124,6 @@ export default function WhyCustomersReturnSection() {
       <div className="mx-auto max-w-[1440px] px-5 md:px-8">
         <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-16">
           <div>
-            <p className={sectionEyebrowClass}>Asiakaskokemus</p>
             <h2 className="font-heading m-0 mt-3 text-3xl font-extrabold tracking-tight text-[var(--color-foreground)] leading-tight md:text-4xl">
               Palvelua, jonka vuoksi asiakkaat palaavat.
             </h2>
@@ -145,7 +143,7 @@ export default function WhyCustomersReturnSection() {
                 <p className="m-0 text-balance font-heading text-base font-semibold leading-relaxed tracking-tight text-[var(--color-foreground)] sm:text-lg">
                   “{item.text}”
                 </p>
-                <p className="m-0 mt-4 text-xs font-semibold uppercase tracking-[0.14em] text-[var(--color-muted)]">
+                <p className="m-0 mt-4 text-xs font-semibold tracking-[0.14em] text-[var(--color-muted)]">
                   {item.author} <span className="mx-2 text-[var(--color-muted)]/50">•</span> {item.source}
                 </p>
               </div>

@@ -17,8 +17,8 @@
   --color-border: #e6e6e6;
   --color-on-primary: #ffffff;
   --color-background: #ffffff;
-  --font-sans: var(--font-inter), "Inter", sans-serif;
-  --font-heading: var(--font-manrope), "Manrope", sans-serif;
+  --font-sans: "General Sans", sans-serif;
+  --font-heading: "General Sans", sans-serif;
 }
 
 :root {

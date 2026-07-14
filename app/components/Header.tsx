@@ -61,7 +61,7 @@ export default function Header() {
               <Link
                 key={item.label}
                 href={item.href}
-                className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--color-foreground)]/75 transition-colors hover:text-[var(--color-accent)]"
+                className="text-xs font-semibold tracking-[0.06em] text-[var(--color-foreground)]/75 transition-colors hover:text-[var(--color-accent)]"
               >
                 {item.label}
               </Link>
@@ -115,7 +115,7 @@ export default function Header() {
               <Link
                 key={item.label}
                 href={item.href}
-                className="rounded-lg px-3 py-3 text-sm font-semibold uppercase tracking-wide text-[var(--color-foreground)] hover:bg-[var(--color-secondary)]"
+                className="rounded-lg px-3 py-3 text-sm font-semibold text-[var(--color-foreground)] hover:bg-[var(--color-secondary)]"
                 onClick={() => setMenuOpen(false)}
               >
                 {item.label}
