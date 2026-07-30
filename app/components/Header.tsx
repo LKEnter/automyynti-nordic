@@ -88,16 +88,18 @@ export default function Header() {
         </div>
       </div>
 
-      {/* Mobile drawer */}
+      {/* Mobile drawer — inert when closed so aria-hidden content is not focusable */}
       <div
         className={[
           "fixed inset-0 z-[60] md:hidden",
           menuOpen ? "pointer-events-auto" : "pointer-events-none",
         ].join(" ")}
         aria-hidden={!menuOpen}
+        {...(!menuOpen ? { inert: true } : {})}
       >
         <button
           type="button"
+          tabIndex={menuOpen ? 0 : -1}
           className={["absolute inset-0 bg-black/50 transition-opacity", menuOpen ? "opacity-100" : "opacity-0"].join(
             " ",
           )}
@@ -110,11 +112,12 @@ export default function Header() {
             menuOpen ? "translate-x-0" : "translate-x-full",
           ].join(" ")}
         >
-          <nav className="mt-4 flex flex-col gap-1">
+          <nav className="mt-4 flex flex-col gap-1" aria-label="Mobiilivalikko">
             {NAV_LINKS.map((item) => (
               <Link
                 key={item.label}
                 href={item.href}
+                tabIndex={menuOpen ? undefined : -1}
                 className="rounded-lg px-3 py-3 text-sm font-semibold text-[var(--color-foreground)] hover:bg-[var(--color-secondary)]"
                 onClick={() => setMenuOpen(false)}
               >
@@ -124,6 +127,7 @@ export default function Header() {
             <Button
               href="#contact"
               variant="secondary"
+              tabIndex={menuOpen ? undefined : -1}
               className="mt-4 w-full border-[var(--color-primary)] text-[var(--color-primary)]"
               onClick={() => setMenuOpen(false)}
             >

@@ -1,8 +1,6 @@
 @import "tailwindcss";
-@import "@morfoos/morfoos-os/styles/admin.css";
 
-/* Scan Morfoos packages so admin/core utility classes are generated */
-@source "../node_modules/@morfoos/morfoos-os/dist/**/*.{js,cjs}";
+/* Scan Morfoos core (used on public site via MorfoosGlobalProvider) */
 @source "../node_modules/@morfoos/core/dist/**/*.{js,cjs}";
 
 @theme {
@@ -17,8 +15,8 @@
   --color-border: #e6e6e6;
   --color-on-primary: #ffffff;
   --color-background: #ffffff;
-  --font-sans: "General Sans", sans-serif;
-  --font-heading: "General Sans", sans-serif;
+  --font-sans: var(--font-general-sans), system-ui, sans-serif;
+  --font-heading: var(--font-general-sans), system-ui, sans-serif;
 }
 
 :root {

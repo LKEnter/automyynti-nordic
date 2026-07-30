@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Button from "./Button";
 
-const HERO_IMAGE_SRC = "/assets/images/hero-showroom.png";
+const HERO_IMAGE_SRC = "/assets/images/hero-showroom.webp";
 
 export default function Hero() {
   return (
@@ -34,6 +34,8 @@ export default function Hero() {
             className="object-cover"
             sizes="(max-width: 1023px) 100vw, 50vw"
             priority
+            fetchPriority="high"
+            quality={80}
           />
         </div>
       </div>

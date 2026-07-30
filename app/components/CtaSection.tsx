@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Button from "./Button";
 
-const CTA_IMAGE = "/assets/images/hero-showroom.png";
+const CTA_IMAGE = "/assets/images/hero-showroom.webp";
 
 export default function CtaSection() {
   return (

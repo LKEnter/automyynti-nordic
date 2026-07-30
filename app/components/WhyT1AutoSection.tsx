@@ -8,7 +8,7 @@ const STATS = [
   { value: "18", label: "Autoa valikoimassa" },
 ] as const;
 
-const DEALERSHIP_IMAGE = "/assets/images/hero-showroom.png";
+const DEALERSHIP_IMAGE = "/assets/images/hero-showroom.webp";
 
 export default function WhyT1AutoSection() {
   return (

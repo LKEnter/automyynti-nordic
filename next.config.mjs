@@ -8,8 +8,34 @@ const nextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
   transpilePackages: ["@morfoos/core", "@morfoos/morfoos-os"],
+  images: {
+    formats: ["image/avif", "image/webp"],
+    qualities: [65, 75, 80],
+  },
   experimental: {
-    optimizePackageImports: ["@morfoos/core"],
+    optimizePackageImports: ["@morfoos/core", "lucide-react"],
+  },
+  async headers() {
+    return [
+      {
+        source: "/fonts/:path*",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
+          },
+        ],
+      },
+      {
+        source: "/assets/:path*",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
+          },
+        ],
+      },
+    ];
   },
 };
 

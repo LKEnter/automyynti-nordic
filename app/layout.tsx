@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { MorfoosGlobalProvider } from "@morfoos/core/providers";
 import Header from "./components/Header";
 import Footer from "../components/layout/Footer";
+import { generalSans } from "./fonts";
 import "./globals.css";
 
 // Fallback baseline metadata metrics
@@ -11,15 +12,8 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="fi">
-      <head>
-        <link rel="preconnect" href="https://api.fontshare.com" />
-        <link
-          href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap"
-          rel="stylesheet"
-        />
-      </head>
-      <body>
+    <html lang="fi" className={generalSans.variable}>
+      <body className={generalSans.className}>
         {/* Automatically activates case-insensitive link delegation and form monitoring */}
         <MorfoosGlobalProvider
           siteId={process.env.NEXT_PUBLIC_SITE_ID || "development_fallback"}

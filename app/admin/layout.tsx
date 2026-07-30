@@ -1,5 +1,6 @@
 import "@/lib/morfoos";
 import React from "react";
+import "./admin.css";
 
 export const metadata = {
   title: "Morfoos OS — Hallintapaneeli",

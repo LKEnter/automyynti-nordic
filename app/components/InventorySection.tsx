@@ -136,6 +136,7 @@ function VehicleCard({ vehicle }: { vehicle: Vehicle }) {
           fill
           className="object-cover transition duration-500 group-hover:scale-[1.03]"
           sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 25vw"
+          quality={65}
         />
         <span className="absolute right-4 top-4 rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-[var(--color-foreground)] backdrop-blur-sm">
           {vehicle.year}
