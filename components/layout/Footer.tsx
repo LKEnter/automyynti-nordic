@@ -19,11 +19,11 @@ export default function Footer() {
           <div>
             <span className="inline-flex items-center gap-2">
               <span className="font-heading text-lg font-extrabold tracking-tight text-[var(--color-primary)]">
-                T1 Auto
+                Automyynti Nordic
               </span>
             </span>
             <p className="m-0 mt-3 max-w-xs text-sm leading-relaxed text-[var(--color-muted)]">
-              Vaihtoautoja, joustava rahoitus ja rehellinen palvelu Raumalla.
+              Vaihtoautoja, joustava rahoitus ja rehellinen palvelu Helsingissä.
             </p>
           </div>
 
@@ -87,7 +87,7 @@ export default function Footer() {
         </div>
 
         <div className="mt-12 border-t border-black/[0.06] pt-6 text-xs text-[var(--color-muted)]">
-          © {year} T1 Auto. Kaikki oikeudet pidätetään.
+          © {year} Automyynti Nordic. Kaikki oikeudet pidätetään.
         </div>
       </div>
     </footer>

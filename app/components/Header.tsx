@@ -36,7 +36,7 @@ export default function Header() {
       onClick={() => setMenuOpen(false)}
     >
       <span className="font-heading text-lg font-extrabold tracking-tight text-[var(--color-primary)] md:text-xl">
-        T1 Auto
+        Automyynti Nordic
       </span>
     </Link>
   );

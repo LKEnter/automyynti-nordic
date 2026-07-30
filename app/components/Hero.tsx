@@ -13,7 +13,7 @@ export default function Hero() {
           </h1>
 
           <p className="m-0 mt-5 max-w-md text-base leading-relaxed text-[var(--color-muted)] md:text-lg">
-            Huolella valittuja vaihtoautoja, joustava rahoitus ja rehellinen palvelu Raumalla.
+            Huolella valittuja vaihtoautoja, joustava rahoitus ja rehellinen palvelu Helsingissä.
           </p>
 
           <div className="mt-8 flex flex-wrap gap-4">
@@ -29,7 +29,7 @@ export default function Hero() {
         <div className="relative min-h-[280px] overflow-hidden rounded-[20px] bg-[var(--color-secondary)] shadow-[0_8px_32px_rgba(0,0,0,0.08)] sm:min-h-[360px] lg:min-h-[440px] h-full">
           <Image
             src={HERO_IMAGE_SRC}
-            alt="T1 Auton vaihtoautoja myyntipihalla"
+            alt="Automyynti Nordicin vaihtoautoja myyntipihalla"
             fill
             className="object-cover"
             sizes="(max-width: 1023px) 100vw, 50vw"

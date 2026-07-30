@@ -23,43 +23,43 @@ function getServerSnapshot() {
 
 const TESTIMONIALS = [
   {
-    text: "Ostin auton Tanelilta ja auto oli erittäin hyvä ja myyjä antoi reilun alennuksen sekä toi sen ilmaiseksi Helsinkiin minulle. Jäi erittäin hyvä mieli kaupoista sekä asiakaspalvelu oli erittäin hyvää.",
-    author: "Nikolai Saari",
+    text: "Ostin auton Markukselta ja auto oli erittäin hyvä ja myyjä antoi reilun alennuksen sekä toi sen ilmaiseksi Helsinkiin minulle. Jäi erittäin hyvä mieli kaupoista sekä asiakaspalvelu oli erittäin hyvää.",
+    author: "Demo Asiakas A",
     source: "2 kuukautta sitten",
   },
   {
     text: "Kaupat sujui helposti ja joustavasti. Hyvää palvelua kaiken kaikkiaan. Suosittelut 👍",
-    author: "Aleksi Myllymäki",
+    author: "Demo Asiakas B",
     source: "kuukausi sitten",
   },
   {
     text: "Luotettavaa ja asiantuntevaa palvelua. Yhteydenpito nopeaa ja joustavaa. Asiakasta kunnioittavaa palvelua, kärsivällisyyttä riitti ja erittäin ystävällinen palvelu. Kiitos positiivisesta kokemuksesta, lämpimät suositukset! ☺️👍🏻",
-    author: "Jade",
+    author: "Demo Asiakas C",
     source: "2 vuotta sitten",
   },
   {
     text: "Todella hyvää asiakaspalvelua. Luotettava myyjä sain kaikkiin kysymyksiini luotettavat vastaukset.",
-    author: "Leevi",
+    author: "Demo Asiakas D",
     source: "vuosi sitten",
   },
   {
-    text: "Taneli oli mukava ja oli kärsivällinen meidän kysymyspatterista huolimatta. Kaupankäynti oli rentoa ja kiireettömän tuntuista. Auto oli mitä ilmoituksessa luvattiin. Kaupat tehtiin ja ollaan tyytyväisiä. Ostaisin uudestaan auton Tanelilta.",
-    author: "Teemu Koskinen",
+    text: "Markus oli mukava ja oli kärsivällinen meidän kysymyspatterista huolimatta. Kaupankäynti oli rentoa ja kiireettömän tuntuista. Auto oli mitä ilmoituksessa luvattiin. Kaupat tehtiin ja ollaan tyytyväisiä. Ostaisin uudestaan auton Markukselta.",
+    author: "Demo Asiakas E",
     source: "2 vuotta sitten",
   },
   {
     text: "Tyttäreni osti tästä liikkeestä Clion. Myyjä jousti aikataulujamme hyvin kun olimme myöhässä, lisäksi koko prosessi meni loistavasti. Suuret kiitokset!",
-    author: "Sirpa Parviainen",
+    author: "Demo Asiakas F",
     source: "3 vuotta sitten",
   },
   {
     text: "Kauppa osti meiltä auton. Kaupat sujui hyvin, ja myyjä oli ymmärtäväinen meidän mokista huolimatta. ☺️ Suosittelen.",
-    author: "Iina Wallenius",
+    author: "Demo Asiakas G",
     source: "vuosi sitten",
   },
   {
     text: "Luonnikas palvelu. Nopea apu akuuttiin tarpeeseen ammattitaitoisesti ja nopealla aikataululla.",
-    author: "Jasmin Määttä",
+    author: "Demo Asiakas H",
     source: "2 vuotta sitten",
   },
 ] as const;

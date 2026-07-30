@@ -59,11 +59,11 @@ async function seedSiteDefaults(siteId: string) {
     update: {},
     create: {
       siteId,
-      companyName: "Esimerkki Yritys Oy",
+      companyName: "Automyynti Nordic",
       businessId: "",
-      phone: "+358401234567",
-      email: "info@esimerkkiyritys.fi",
-      address: "Keskuskatu 12 A",
+      phone: "+358400000001",
+      email: "info@automyynti-nordic.fi",
+      address: "Esimerkkikatu 1",
       postalCode: "00100",
       city: "Helsinki",
       openingHours: "Arkisin 8–16",
@@ -101,7 +101,7 @@ async function seedSiteDefaults(siteId: string) {
 async function main() {
   const email = await seedAdminUser();
   const siteId = process.env.NEXT_PUBLIC_SITE_ID?.trim() || "development";
-  const siteName = "Esimerkki Yritys Oy";
+  const siteName = "Automyynti Nordic";
 
   await seedSiteRecord(siteId, siteName);
   await seedSiteDefaults(siteId);

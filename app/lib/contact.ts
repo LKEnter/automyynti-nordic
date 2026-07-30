@@ -1,17 +1,17 @@
-/** Shared contact details */
+/** Shared contact details — fictional demo identity */
 export const CONTACT = {
-  phoneLabel: "044 522 2836",
-  phoneHref: "tel:+358445222836",
-  emailLabel: "t1automyynti@gmail.com",
-  emailHref: "mailto:t1automyynti@gmail.com",
-  addressLine1: "Ihoden Kylätie 90",
-  addressLine2: "27320 Ihode",
+  phoneLabel: "040 000 0001",
+  phoneHref: "tel:+358400000001",
+  emailLabel: "info@automyynti-nordic.fi",
+  emailHref: "mailto:info@automyynti-nordic.fi",
+  addressLine1: "Esimerkkikatu 1",
+  addressLine2: "00100 Helsinki",
   mapHref:
-    "https://www.google.com/maps/search/?api=1&query=Ihoden+Kyl%C3%A4tie+90%2C+27320+Ihode%2C+Suomi",
+    "https://www.google.com/maps/search/?api=1&query=Esimerkkikatu+1%2C+00100+Helsinki%2C+Suomi",
 } as const;
 
 export const MAP_EMBED_SRC =
-  "https://www.google.com/maps?q=Ihoden+Kylätie+90,+27320+Ihode,+Suomi&output=embed&z=15";
+  "https://www.google.com/maps?q=Esimerkkikatu+1,+00100+Helsinki,+Suomi&output=embed&z=15";
 
 export const OPENING_HOURS = [
   { day: "Ma-Pe", hours: "10–19" },

@@ -10,7 +10,7 @@ export default function CtaSection() {
         <div className="absolute inset-0 overflow-hidden rounded-[inherit]">
           <Image
             src={CTA_IMAGE}
-            alt="T1 Auton myyntipiha"
+            alt="Automyynti Nordicin myyntipiha"
             fill
             sizes="(max-width: 1440px) 100vw, 1440px"
             className="object-cover object-center brightness-[0.45] contrast-[1.05]"

@@ -10,14 +10,14 @@ const STATS = [
 
 const DEALERSHIP_IMAGE = "/assets/images/hero-showroom.webp";
 
-export default function WhyT1AutoSection() {
+export default function WhyDealershipSection() {
   return (
-    <section className="w-full bg-white py-14 md:py-20" aria-label="Miksi T1 Auto">
+    <section className="w-full bg-white py-14 md:py-20" aria-label="Miksi Automyynti Nordic">
       <div className="mx-auto max-w-[1440px] px-5 md:px-8">
         <header className="mx-auto max-w-3xl text-center">
-          <h2 className={sectionH2CenterClass}>Miksi T1 Auto</h2>
+          <h2 className={sectionH2CenterClass}>Miksi Automyynti Nordic</h2>
           <p className={sectionLedeCenterClass}>
-            Henkilökohtaista ja rehellistä autokauppaa Raumalla — ilman turhaa mutkittelua.
+            Henkilökohtaista ja rehellistä autokauppaa Helsingissä — ilman turhaa mutkittelua.
           </p>
         </header>
 
@@ -38,7 +38,7 @@ export default function WhyT1AutoSection() {
           <div className="relative min-h-[280px] overflow-hidden rounded-[20px] bg-[var(--color-secondary)] shadow-[0_8px_32px_rgba(0,0,0,0.08)] sm:min-h-[360px] lg:min-h-[420px]">
             <Image
               src={DEALERSHIP_IMAGE}
-              alt="T1 Auton myyntipiha ja vaihtoautot"
+              alt="Automyynti Nordicin myyntipiha ja vaihtoautot"
               fill
               className="object-cover"
               sizes="(max-width: 1023px) 100vw, 58vw"

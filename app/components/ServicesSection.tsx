@@ -17,7 +17,7 @@ const SERVICES: Service[] = [
     description:
       "Valikoimastamme löydät huolella tarkastettuja vaihtoautoja. Jokainen auto valitaan kunnon, historian ja hinta-laatusuhteen perusteella.",
     imageSrc: "/assets/images/cars/volkswagen-golf.webp",
-    imageAlt: "Tarkastettu vaihtoauto T1 Auton valikoimassa",
+    imageAlt: "Tarkastettu vaihtoauto Automyynti Nordicin valikoimassa",
     cta: "Tutustu valikoimaan",
     href: "#autot",
   },
